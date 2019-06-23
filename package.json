@@ -1,0 +1,12 @@
+{
+	"name": "fsk-test",
+	"version": "0.0.1",
+	"dependencies": {
+		"@babel/core": "latest",
+		"@babel/plugin-transform-modules-commonjs": "latest",
+		"babelify": "latest",
+		"browserify-middleware": "latest",
+		"express": "latest",
+		"morgan": "latest"
+	}
+}

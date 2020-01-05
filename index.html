@@ -23,7 +23,7 @@ canvas {
 	</style>
 </head>
 <body>
-	<div id="fft-info-container" style="display: none; position: absolute"></div>
+	<div id="info-container" style="display: none; position: absolute"></div>
 	<div class="canvasContainer">
 		<canvas id="inputSamples" class="full-width"></canvas>
 	</div>
@@ -38,15 +38,14 @@ canvas {
 		<canvas id="inputTone-256" width="200" height="200"></canvas>
 		<canvas id="inputTone-500" width="200" height="200"></canvas>
 		<canvas id="inputTone-512" width="200" height="200"></canvas>
+		<canvas id="inputTone-1000" width="200" height="200"></canvas>
 		<canvas id="inputTone-1024" width="200" height="200"></canvas>
 	</div>
 	<div class="canvasContainer">
-		<canvas id="mark-filter" class="full-width"></canvas>
-		<canvas id="space-filter" class="full-width"></canvas>
-	</div>
-	<div class="canvasContainer">
-		<canvas id="fsk-samples" class="full-width"></canvas>
-		<canvas id="fsk-input" class="full-width"></canvas>
+		<canvas id="filters-0" class="full-width"></canvas>
+		<canvas id="filters-1" class="full-width"></canvas>
+		<canvas id="filters-2" class="full-width"></canvas>
+		<canvas id="filters-3" class="full-width"></canvas>
 	</div>
 	<script type="text/javascript" src="app.js"></script>
 </body>

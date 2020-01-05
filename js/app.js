@@ -13,7 +13,7 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-let waveLength = 100, phase = 0, sPower = 10, nPower = 0;
+let waveLength = 48000 / 2125, phase = 0, sPower = 10, nPower = 0;
 
 window.onkeydown = e => {
 	if(e.key === 'ArrowLeft') {

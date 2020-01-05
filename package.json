@@ -1,6 +1,9 @@
 {
 	"name": "fsk-test",
 	"version": "0.0.1",
+	"scripts": {
+		"start": "babel-node index.js"
+	},
 	"dependencies": {
 		"@babel/core": "latest",
 		"@babel/plugin-transform-modules-commonjs": "latest",

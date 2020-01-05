@@ -1,4 +1,5 @@
-import input, { windowSize } from './input';
+import { windowSize, markWaveLength, spaceWaveLength } from './parameters';
+import input from './input';
 import { fft } from './fft';
 
 
@@ -31,21 +32,18 @@ requestAnimationFrame(draw);
 
 
 function draw() {
-	setTimeout(() => requestAnimationFrame(draw), 500);
+	setTimeout(() => requestAnimationFrame(draw), 100);
 
 	const inputSamples = input();
 
 	drawInput(inputSamples);
 
-	// drawTone(inputSamples, 10);
-	// drawTone(inputSamples, 100);
-	// drawTone(inputSamples, windowSize / 8);
-	// drawTone(inputSamples, 200);
-	// drawTone(inputSamples, windowSize / 4);
-	// drawTone(inputSamples, 500);
-	// drawTone(inputSamples, windowSize / 2);
-	// drawTone(inputSamples, 1000);
-	// drawTone(inputSamples, windowSize);
+	drawTone(0, inputSamples, markWaveLength);
+	drawTone(1, inputSamples, spaceWaveLength);
+	drawTone(2, inputSamples, windowSize / 8);
+	drawTone(2, inputSamples, windowSize / 4);
+	drawTone(3, inputSamples, windowSize / 2);
+	drawTone(4, inputSamples, windowSize);
 }
 
 
@@ -117,8 +115,8 @@ function drawFft(inputSamples) {
 }
 
 
-function drawTone(input, d) {
-	const inputToneCanvas = document.getElementById('inputTone-' + d);
+function drawTone(index, input, d) {
+	const inputToneCanvas = document.getElementById('inputTone-' + index);
 	const inputToneCtx = inputToneCanvas.getContext('2d');
 
 	const canvasWidth = inputToneCanvas.width;

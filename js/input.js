@@ -1,4 +1,5 @@
-export const windowSize = 1024;
+import { windowSize } from './parameters';
+
 const buffer = new Float32Array(windowSize);
 let noise = new Float32Array;
 let sPower = 1;

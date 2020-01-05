@@ -1,5 +1,5 @@
-import { markFrequency, spaceFrequency, markWaveLength, spaceWaveLength } from './parameters';
-import input, { windowSize } from './input';
+import { windowSize, markFrequency, spaceFrequency, markWaveLength, spaceWaveLength } from './parameters';
+import input from './input';
 
 /**
  * Goertzel filter
@@ -34,7 +34,7 @@ requestAnimationFrame(draw);
 
 
 function draw() {
-	setTimeout(() => requestAnimationFrame(draw), 500);
+	setTimeout(() => requestAnimationFrame(draw), 100);
 	drawFilters(0, spaceWaveLength * 100, markWaveLength * 100);
 }
 

@@ -1,4 +1,4 @@
-import { windowSize } from './input';
+import { windowSize } from './parameters';
 
 // https://en.wikipedia.org/wiki/Talk%3ABaudot_code#Baudot_keyboard/keyset?
 const baudot = {
@@ -31,20 +31,14 @@ const baudot = {
 };
 
 const baudRate = 45.45;
-
-const audioSampleRate = 48000;
-const audioMarkFrequency = 1955; // waves in second
-const audioMarkWaveLength = 48000 / audioMarkFrequency; // in samples
-const audioSpaceFrequency = 2125; // waves in second
-const audioSpaceWaveLength = 48000 / audioSpaceFrequency; // in samples
-const audioSamplesPerByte = audioSampleRate * 60 / 45.45;
-const audioSamplesPerBit = audioSamplesPerByte / 8;
-
-const samplesPerByte = windowSize;
+const sampleRate = 48000;
+const markFrequency = 1955; // waves in second
+const spaceFrequency = 2125; // waves in second
+const markWaveLength = 48000 / markFrequency; // in samples
+const spaceWaveLength = 48000 / spaceFrequency; // in samples
+const samplesPerByte = sampleRate * 60 / 45.45;
 const samplesPerBit = samplesPerByte / 8;
-const downSampleFactor = samplesPerByte / audioSamplesPerByte;
-const markWaveLength = audioMarkWaveLength * downSampleFactor;
-const spaceWaveLength = audioSpaceWaveLength * downSampleFactor;
 
-console.log("Samples per byte: %f\nSamples per bit: %f\nDown sample factor: %f", audioSamplesPerByte, samplesPerBit, downSampleFactor);
-console.log("Mark wave length: %f\nSpace wave length: %f", audioMarkWaveLength, audioSpaceWaveLength);
+console.log("Samples per byte: %f\nSamples per bit: %f", samplesPerByte, samplesPerBit);
+console.log("Mark wave length: %f\nSpace wave length: %f", markWaveLength, spaceWaveLength);
+console.log("Mark waves per bit: %f\nSpace waves per bit: %f", samplesPerBit / markWaveLength, samplesPerBit / spaceWaveLength);

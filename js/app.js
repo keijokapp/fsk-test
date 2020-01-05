@@ -1,5 +1,6 @@
 import './visualisation';
 import './afsk';
+import { markWaveLength } from './parameters';
 import { setNoisePower, setPhase, setSignalPower, setWaveLength } from './input';
 
 function resize() {
@@ -13,7 +14,7 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-let waveLength = 48000 / 2125, phase = 0, sPower = 10, nPower = 0;
+let waveLength = markWaveLength, phase = 0, sPower = 10, nPower = 0;
 
 window.onkeydown = e => {
 	if(e.key === 'ArrowLeft') {

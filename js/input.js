@@ -1,4 +1,4 @@
-import { windowSize } from './parameters';
+import { windowSize, markWaveLength, spaceWaveLength } from './parameters';
 
 const buffer = new Float32Array(windowSize);
 let noise = new Float32Array;
@@ -8,6 +8,16 @@ let minPhase = 0;
 let maxPhase = 0;
 let currentPhase = 0;
 let waveLength = 0;
+
+
+const inputs = [
+	markWaveLength,
+	200,
+	spaceWaveLength,
+	200,
+	markWaveLength
+];
+
 
 function generateNoise() {
 	if(currentPhase < minPhase) {
@@ -37,10 +47,25 @@ function generateNoise() {
 
 function rebuildBuffer() {
 	generateNoise();
+	let phaseDelta = 0;
+	let inputIndex = 0;
+	let countDown = inputs[1] - currentPhase;
+
 	for(let i = 0; i < buffer.length; i++) {
-		const sine = Math.sin(2 * Math.PI * (i + currentPhase) / waveLength);
-		const sample = Math.atan(sine);
-		buffer[i] = sPower * sample + nPower * noise[currentPhase - minPhase + i];
+		let alpha = 2 * Math.PI * (i + currentPhase) / inputs[inputIndex] + phaseDelta;
+ 		countDown--;
+ 		if (countDown < 0) {
+	 		while (countDown < 0) {
+	 			inputIndex += 2;
+	 			countDown += inputs[inputIndex + 1];
+	 		}
+			const newAlpha = 2 * Math.PI * (i + currentPhase) / inputs[inputIndex]
+ 			phaseDelta = alpha - newAlpha;
+ 			alpha = newAlpha + phaseDelta;
+	 	}
+
+		const sine = Math.sin(alpha);
+		buffer[i] = sPower * sine + nPower * noise[currentPhase - minPhase + i];
 	}
 }
 

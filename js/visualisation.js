@@ -37,6 +37,7 @@ function draw() {
 	const inputSamples = input();
 
 	drawInput(inputSamples);
+	drawFft(inputSamples);
 
 	drawTone(0, inputSamples, markWaveLength);
 	drawTone(1, inputSamples, spaceWaveLength);

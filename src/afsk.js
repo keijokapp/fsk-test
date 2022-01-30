@@ -1,5 +1,7 @@
-import { windowSize, markFrequency, spaceFrequency, markWaveLength, spaceWaveLength } from './parameters';
-import input from './input';
+import {
+	windowSize, markFrequency, spaceFrequency, markWaveLength, spaceWaveLength
+} from './parameters.js';
+import input from './input.js';
 
 /**
  * Goertzel filter
@@ -15,8 +17,9 @@ function goertzelFilter(f, N) {
 
 	return sample => {
 		buffer[offset] = sample;
-		let Skn1 = 0, Skn2 = 0;
-		for(let i = 0; i < N; i++) {
+		let Skn1 = 0; let
+			Skn2 = 0;
+		for (let i = 0; i < N; i++) {
 			const Skn = buffer[(offset + i) % N] + coeff * Skn1 - Skn2;
 			Skn2 = Skn1;
 			Skn1 = Skn;
@@ -28,16 +31,12 @@ function goertzelFilter(f, N) {
 	};
 }
 
-
-
 requestAnimationFrame(draw);
-
 
 function draw() {
 	setTimeout(() => requestAnimationFrame(draw), 100);
 	drawFilters(0, spaceWaveLength * 100, markWaveLength * 100);
 }
-
 
 function drawFilters(index, spaceFilterSize, markFilterSize) {
 	const markFilter = goertzelFilter(markFrequency, markFilterSize);
@@ -45,14 +44,14 @@ function drawFilters(index, spaceFilterSize, markFilterSize) {
 	const markSamples = new Float32Array(windowSize);
 	const spaceSamples = new Float32Array(windowSize);
 	const samples = input();
-	for(let i = 0; i < windowSize; i++) {
+	for (let i = 0; i < windowSize; i++) {
 		markSamples[i] = markFilter(samples[i]);
 		spaceSamples[i] = spaceFilter(samples[i]);
 	}
 
 	/// drawing
 
-	const e = document.getElementById('filters-' + index);
+	const e = document.getElementById(`filters-${index}`);
 	const halfHeight = e.height / 2;
 	const ctx = e.getContext('2d');
 
@@ -68,7 +67,7 @@ function drawFilters(index, spaceFilterSize, markFilterSize) {
 	ctx.beginPath();
 	ctx.strokeStyle = 'red';
 	ctx.moveTo(-1, halfHeight);
-	for(let i = 0; i < windowSize; i++) {
+	for (let i = 0; i < windowSize; i++) {
 		ctx.lineTo(i * pixelsPerSample, halfHeight - spaceSamples[i] / 10);
 	}
 	ctx.moveTo(spaceFilterSize * pixelsPerSample, 0);
@@ -78,7 +77,7 @@ function drawFilters(index, spaceFilterSize, markFilterSize) {
 	ctx.beginPath();
 	ctx.strokeStyle = 'blue';
 	ctx.moveTo(-1, halfHeight);
-	for(let i = 0; i < windowSize; i++) {
+	for (let i = 0; i < windowSize; i++) {
 		ctx.lineTo(i * pixelsPerSample, halfHeight - markSamples[i] / 10);
 	}
 	ctx.moveTo(markFilterSize * pixelsPerSample, 0);

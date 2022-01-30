@@ -6,28 +6,28 @@ function exponent(k, N) {
 	return mapExponent[N][k];
 }
 
-export function fft(samples) {
+export default function fft(samples) {
 	const N = samples.length;
 
 	if (N === 1) {
 		const r = new Float32Array(1);
 		const i = new Float32Array(1);
-		r[0] = samples[0];
+		[r[0]] = samples;
 		i[0] = 0;
 		return [r, i];
 	}
 
-	if(N === 0 || N % 2 !== 0) {
+	if (N === 0 || N % 2 !== 0) {
 		throw new Error('FFT size must be power of 2');
 	}
 
 	const [Xer, Xei] = fft(samples.filter((_, i) => i % 2 === 0));
-	const [Xor, Xoi]  = fft(samples.filter((_, i) => i % 2 === 1));
+	const [Xor, Xoi] = fft(samples.filter((_, i) => i % 2 === 1));
 
 	const Xr = new Float32Array(N);
 	const Xi = new Float32Array(N);
 
-	for(let k = 0; k < N / 2; k++) {
+	for (let k = 0; k < N / 2; k++) {
 		const [exr, exi] = exponent(k, N);
 		const er = exr * Xor[k] - exi * Xoi[k];
 		const ei = exr * Xoi[k] + exi * Xor[k];

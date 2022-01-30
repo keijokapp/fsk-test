@@ -1,15 +1,22 @@
 {
+	"type": "module",
 	"name": "fsk-test",
 	"version": "0.0.1",
-	"scripts": {
-		"start": "babel-node index.js"
+	"description": "Personal AFSK playground",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/keijokapp/fsk-test"
 	},
-	"dependencies": {
-		"@babel/core": "latest",
-		"@babel/plugin-transform-modules-commonjs": "latest",
-		"babelify": "latest",
-		"browserify-middleware": "latest",
-		"express": "latest",
-		"morgan": "latest"
+	"author": "Keijo Kapp <keijo.kapp@gmail.com>",
+	"license": "ISC",
+	"scripts": {
+		"lint": "eslint webpack.config.js src"
+	},
+	"devDependencies": {
+		"eslint": "^8.8.0",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"html-webpack-plugin": "^5.5.0",
+		"webpack": "^5.67.0",
+		"webpack-dev-server": "^4.7.3"
 	}
 }
